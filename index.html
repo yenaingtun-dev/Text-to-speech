@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-blue-200">
+
+<div class="flex flex-col items-center justify-center h-screen" id="text-to-speech">
+    <label for="text"></label>
+    <textarea class="block p-2.5 w-[80%] h-72 mb-5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" id="text"></textarea>
+    <div class="flex space-x-4 items-center justify-between">
+        <label for="voices"></label>
+        <select id="voices" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"></select>
+        <button class="py-2 px-5 text-center text-xs rounded-lg bg-blue-300" id="play-button">Play</button>
+        <button class="hidden py-2 px-5 text-center text-xs rounded-lg bg-blue-300" id="resume-button">Resume</button>
+        <button class="hidden py-2 px-5 text-center text-xs rounded-lg bg-blue-300" id="pause-button">Pause</button>
+        <button class="py-2 px-5 text-center text-xs rounded-lg bg-red-300" id="stop-button">Stop</button>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
