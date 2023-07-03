@@ -4,6 +4,7 @@ let pauseButton = document.getElementById("pause-button");
 let resumeButton = document.getElementById("resume-button");
 let stopButton = document.getElementById("stop-button");
 let speedButton = document.getElementById("speed-button");
+let clearText = document.getElementById("clear-text");
 let arr = window.speechSynthesis.getVoices();
 let options = "";
 let selected = "";
@@ -25,17 +26,24 @@ utterance.addEventListener('boundary', e => {
     currentChar = e.charIndex;
 })
 utterance.addEventListener('end', () => {
-    textArea.disabled = false
+    textArea.disabled = false;
+    document.getElementById('stop-button').style.display = 'none';
+    document.getElementById('pause-button').style.display = 'none';
+    document.getElementById('play-button').style.display = 'block';
 })
-
-speakButton.addEventListener("click", function () {
+speakButton.addEventListener("click",  () =>  {
     speak(textArea.value)
 });
-pauseButton.addEventListener("click", pauseText);
 speedButton.addEventListener('input', () => {
     window.speechSynthesis.cancel();
+    document.getElementById('speed-button').style.display = 'block';
+    document.getElementById('stop-button').style.display = 'block';
     speak(utterance.text.substring(currentChar));
 });
+pauseButton.addEventListener("click", pauseText);
+stopButton.addEventListener("click", stop);
+resumeButton.addEventListener("click", resume);
+clearText.addEventListener("click", clear);
 
 function speak(text) {
     if (speechSynthesis.paused && speechSynthesis.speaking) {
@@ -48,6 +56,8 @@ function speak(text) {
     speechSynthesis.speak(utterance)
     document.getElementById('play-button').style.display = 'none';
     document.getElementById('pause-button').style.display = 'block';
+    document.getElementById('speed-button').style.display = 'block';
+    document.getElementById('stop-button').style.display = 'block';
 }
 
 function stopText() {
@@ -59,21 +69,29 @@ function pauseText() {
     if (speechSynthesis.speaking) speechSynthesis.pause()
     document.getElementById('pause-button').style.display = 'none';
     document.getElementById('resume-button').style.display = 'block';
+    document.getElementById('speed-button').style.display = 'block';
+    document.getElementById('stop-button').style.display = 'block';
 }
 
+function clear() {
+    textArea.value = '';
+    document.getElementById('speed-button').style.display = 'none';
+}
 
-resumeButton.addEventListener("click", function () {
+function resume() {
     if (window.speechSynthesis.pause && window.speechSynthesis.speaking){
         window.speechSynthesis.resume();
         document.getElementById('pause-button').style.display = 'block';
         document.getElementById('resume-button').style.display = 'none';
     }
     window.speechSynthesis.resume();
-});
+}
 
-stopButton.addEventListener("click", function () {
+function stop() {
     window.speechSynthesis.cancel();
     document.getElementById('play-button').style.display = 'block';
     document.getElementById('pause-button').style.display = 'none';
     document.getElementById('resume-button').style.display = 'none';
-});
+    document.getElementById('speed-button').style.display = 'none';
+    document.getElementById('stop-button').style.display = 'none';
+}
