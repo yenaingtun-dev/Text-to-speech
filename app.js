@@ -27,17 +27,19 @@ utterance.addEventListener('boundary', e => {
 })
 utterance.addEventListener('end', () => {
     textArea.disabled = false;
-    document.getElementById('stop-button').style.display = 'none';
-    document.getElementById('pause-button').style.display = 'none';
-    document.getElementById('play-button').style.display = 'block';
+    // document.getElementById('stop-button').style.display = 'none';
+    // document.getElementById('pause-button').style.display = 'none';
+    // document.getElementById('resume-button').style.display = 'none';
+    // document.getElementById('play-button').style.display = 'block';
+    // document.getElementById('clear-text').style.display = 'block';
 })
-speakButton.addEventListener("click",  () =>  {
-    speak(textArea.value)
+speakButton.addEventListener("click", () => {
+    if (textArea.value !== ''){
+        speak(textArea.value);
+    }
 });
 speedButton.addEventListener('input', () => {
     window.speechSynthesis.cancel();
-    document.getElementById('speed-button').style.display = 'block';
-    document.getElementById('stop-button').style.display = 'block';
     speak(utterance.text.substring(currentChar));
 });
 pauseButton.addEventListener("click", pauseText);
@@ -51,13 +53,8 @@ function speak(text) {
     }
     utterance.text = text
     utterance.rate = speedButton.value || 1
-    // if (speechSynthesis.speaking) return
     textArea.disabled = true
     speechSynthesis.speak(utterance)
-    document.getElementById('play-button').style.display = 'none';
-    document.getElementById('pause-button').style.display = 'block';
-    document.getElementById('speed-button').style.display = 'block';
-    document.getElementById('stop-button').style.display = 'block';
 }
 
 function stopText() {
@@ -67,31 +64,19 @@ function stopText() {
 
 function pauseText() {
     if (speechSynthesis.speaking) speechSynthesis.pause()
-    document.getElementById('pause-button').style.display = 'none';
-    document.getElementById('resume-button').style.display = 'block';
-    document.getElementById('speed-button').style.display = 'block';
-    document.getElementById('stop-button').style.display = 'block';
 }
 
 function clear() {
     textArea.value = '';
-    document.getElementById('speed-button').style.display = 'none';
 }
 
 function resume() {
-    if (window.speechSynthesis.pause && window.speechSynthesis.speaking){
+    if (window.speechSynthesis.pause && window.speechSynthesis.speaking) {
         window.speechSynthesis.resume();
-        document.getElementById('pause-button').style.display = 'block';
-        document.getElementById('resume-button').style.display = 'none';
     }
     window.speechSynthesis.resume();
 }
 
 function stop() {
     window.speechSynthesis.cancel();
-    document.getElementById('play-button').style.display = 'block';
-    document.getElementById('pause-button').style.display = 'none';
-    document.getElementById('resume-button').style.display = 'none';
-    document.getElementById('speed-button').style.display = 'none';
-    document.getElementById('stop-button').style.display = 'none';
 }

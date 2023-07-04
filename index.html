@@ -9,19 +9,19 @@
 
 <div class="flex flex-col items-center justify-center h-screen" id="text-to-speech">
     <label for="text"></label>
-    <textarea class="block p-2.5 w-[80%] h-72 mb-5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" id="text"></textarea>
-    <div class="flex space-x-4 items-center justify-between">
+    <textarea class="block  w-[90%] h-[30rem] mb-5 p-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 sm:w-[80%] sm:h-72" id="text"></textarea>
+    <div class="flex flex-wrap p-5 space-x-2 space-y-2 items-center justify-center sm:justify-between md:flex-nowrap md:p-0 sm:space-x-4">
         <div>
             <label for="voices"></label>
             <select id="voices" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"></select>
             <label for="speed-button" class=""></label>
-            <input id="speed-button" type="range" min="0" max="4" value="1" class="hidden w-full h-2 mt-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+            <input id="speed-button" type="range" min="1" max="2" value="1" class="w-full h-2 mt-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
         </div>
         <button class="py-2 px-5 text-center text-xs rounded-lg bg-blue-300" id="play-button">Play</button>
-        <button class="hidden py-2 px-5 text-center text-xs rounded-lg bg-blue-300" id="resume-button">Resume</button>
-        <button class="hidden py-2 px-5 text-center text-xs rounded-lg bg-blue-300" id="pause-button">Pause</button>
-        <button class="hidden py-2 px-5 text-center text-xs rounded-lg bg-red-300" id="stop-button">Stop</button>
-        <button class="hidden py-2 px-5 text-center text-xs rounded-lg bg-red-300" id="clear-text">Clear Text</button>
+        <button class="py-2 px-5 text-center text-xs rounded-lg bg-blue-300" id="resume-button">Resume</button>
+        <button class="py-2 px-5 text-center text-xs rounded-lg bg-blue-300" id="pause-button">Pause</button>
+        <button class="py-2 px-5 text-center text-xs rounded-lg bg-red-300" id="stop-button">Stop</button>
+        <button class="py-2 px-5 text-center text-xs rounded-lg bg-red-300" id="clear-text">Clear Text</button>
     </div>
 </div>
 
