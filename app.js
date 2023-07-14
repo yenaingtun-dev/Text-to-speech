@@ -47,11 +47,24 @@ stopButton.addEventListener("click", stop);
 resumeButton.addEventListener("click", resume);
 clearText.addEventListener("click", clear);
 
+utterance.addEventListener('boundary', (e) => {
+    let currentWord = utterance.text.slice(e.charIndex, e.charIndex + e.charLength);
+    console.log('Current word:', currentWord);
+    textArea.innerHTML = utterance.text.replaceAll(currentWord, '<tspan style="color: blue">' + currentWord + '</tspan>');
+    return textArea;
+    // let span = document.createElement('span');
+    // span.classList.add('spoken-word');
+    // span.textContent = currentWord;
+    // let text = textArea.textContent;
+    // textArea.textContent = text.replace(currentWord, '');
+    // textArea.appendChild(span);
+});
+
 function speak(text) {
     if (speechSynthesis.paused && speechSynthesis.speaking) {
         return speechSynthesis.resume();
     }
-    utterance.text = text
+    utterance.text = text;
     utterance.rate = speedButton.value || 1
     textArea.disabled = true
     speechSynthesis.speak(utterance)
