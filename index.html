@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Texts To Speech</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>
         .spoken-word {
             color: red; /* Define the desired color */
@@ -12,7 +13,7 @@
 </head>
 <body class="bg-blue-200">
 
-<div class="flex flex-col items-center justify-center h-screen" id="text-to-speech">
+<div x-data="{ showModal: false }" @keydown.window.escape="showModal = false" class="flex flex-col items-center justify-center h-screen" id="text-to-speech">
     <label for="text"></label>
     <textarea class="block  w-[90%] h-[30rem] mb-5 p-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 sm:w-[80%] sm:h-72" id="text"></textarea>
     <div class="flex flex-wrap p-5 space-x-2 space-y-2 items-center justify-center sm:justify-between md:flex-nowrap md:p-0 sm:space-x-4">
@@ -25,8 +26,15 @@
         <button class="py-2 px-5 text-center text-xs rounded-lg bg-blue-300" id="play-button">Play</button>
         <button class="py-2 px-5 text-center text-xs rounded-lg bg-blue-300" id="resume-button">Resume</button>
         <button class="py-2 px-5 text-center text-xs rounded-lg bg-blue-300" id="pause-button">Pause</button>
+        <button  @click="showModal = !showModal"  class="py-2 px-5 text-center text-xs rounded-lg bg-blue-300" id="modal-text">Modal</button>
         <button class="py-2 px-5 text-center text-xs rounded-lg bg-red-300" id="stop-button">Stop</button>
         <button class="py-2 px-5 text-center text-xs rounded-lg bg-red-300" id="clear-text">Clear Text</button>
+    </div>
+    <div x-cloak x-show="showModal" x-transition.opacity class="fixed inset-0 bg-slate-900/75"></div>
+    <div x-cloak x-show="showModal" x-transition class="fixed inset-0 z-50 flex items-center justify-center">
+        <div @click.away="showModal = false" class="w-screen max-w-xl mx-auto bg-teal-400 rounded-lg h-96">
+            <span class="text-xl font-semibold flex items-center justify-center h-[100%]" id="output"></span>
+        </div>
     </div>
 </div>
 

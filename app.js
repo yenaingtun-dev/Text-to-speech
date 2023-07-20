@@ -50,7 +50,11 @@ clearText.addEventListener("click", clear);
 utterance.addEventListener('boundary', (e) => {
     let currentWord = utterance.text.slice(e.charIndex, e.charIndex + e.charLength);
     console.log('Current word:', currentWord);
-    textArea.innerHTML = utterance.text.replaceAll(currentWord, '<tspan style="color: blue">' + currentWord + '</tspan>');
+    let output = document.getElementById('output');
+    // textArea.textContent = utterance.text.replaceAll(currentWord, '<span  id="letter" style="color: blue">' + currentWord + '</span>');
+    if (currentWord.length < 20) {
+     output.textContent = currentWord;
+    }
     return textArea;
     // let span = document.createElement('span');
     // span.classList.add('spoken-word');
